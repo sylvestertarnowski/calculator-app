@@ -1,27 +1,61 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import "./css/App.css";
+import Display from "./Display";
+// import Number from "./Number";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      memory: "",
+      display: "",
+      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+    }
+    
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClear = this.handleClear.bind(this);
+  }
+
+  handleClick(event) {
+    const {name} = event.target;
+    this.setState(prevState => {
+      return {display: prevState.display + name,}
+    })
+  }
+
+  handleClear() {
+    this.setState({
+      display: "",
+    })
+  }
+
   render() {
+    let nums = this.state.numbers
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="calculator">
+        <Display data={this.state.display}/>
+        <button
+          className="clear"
+          onClick={this.handleClear}
+        >
+          Clear
+        </button>
+        <div className="buttons-container">
+          {
+            nums.map(num => 
+            <button 
+              name={num.toString()}
+              key={num}
+              className="number"
+              id={num.toString()}
+              onClick={this.handleClick} 
+            >
+              {num.toString()}
+            </button>)
+          }
+        </div>
       </div>
-    );
+    )
   }
 }
 

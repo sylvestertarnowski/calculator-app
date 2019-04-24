@@ -1,8 +1,12 @@
 .calculator {
-    height: 500px;
-    width: 400px;
+    /* height: 500px;
+    width: 400px; */
     border: 1px dashed green;
     font-size: 28px;
+}
+
+.clear-container {
+    display: flex;
 }
 
 .clear {
@@ -10,7 +14,17 @@
     width: 100%;
 }
 
-.buttons-container {
+.numpad-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+}
+
+.buttons-container {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+}
+
+.operations-container {
+    display: flex;
+    flex-direction: column;
 }

@@ -7,9 +7,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      memory: "",
+      memory: [],
       display: "",
-      operation: "",
       numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "."]
     }
 
@@ -43,7 +42,7 @@ class App extends Component {
 
   handleClearAll() {
     this.setState({
-      memory: "",
+      memory: [],
       display: "",
     })
   }
@@ -61,23 +60,30 @@ class App extends Component {
   handleOperation(event) {
     let { name } = event.target;
     this.setState(prevState => {
+      let updatedMemory = prevState.memory;
+      updatedMemory.push(prevState.display, name);
+      console.log(updatedMemory);
       return {
-        memory: prevState.display,
+        memory: updatedMemory,
         display: "",
-        operation: name
       }
     })
   }
 
+  checkIfArrayEndsOnOperator(arr) {
+
+  }
+
   handleEquals() {
     this.setState(prevState => {
-      let x = parseFloat(prevState.memory);
-      let y = parseFloat(prevState.display);
-      let result = this.operations[prevState.operation](x, y);
+      let finalArray = prevState.memory;
+      finalArray.push(prevState.display);
+      // if(finalArray[finalArray.length - 1] )
+      let finalEquasion = finalArray.join(" ");
+      let result = eval(finalEquasion);
       return {
-        memory: "",
-        display: result.toString(),
-        operation: "",
+        memory: [],
+        display: result,
       }
     })
   }

@@ -1,9 +1,12 @@
 import React from "react";
+import "./css/Memory.css";
 
 function Memory(props) {
+    console.log(props.data.join(" "));
+    // let result = props.data.join(" ");
     return (
-        <div>
-            {props.data}
+        <div className="memory">
+            {props.data.join(" ")}
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./css/App.css";
 import Display from "./Display";
-// import Number from "./Number";
+import Memory from "./Memory";
 
 class App extends Component {
   constructor() {
@@ -13,9 +13,19 @@ class App extends Component {
       numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "."]
     }
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this); //clicking on any number or dot
     this.handleClear = this.handleClear.bind(this);
     this.handleClearAll = this.handleClearAll.bind(this);
+    this.handleBackspace = this.handleBackspace.bind(this);
+    this.handleOperation = this.handleOperation.bind(this);
+    this.handleEquals = this.handleEquals.bind(this);
+  }
+
+  operations = {
+    "+": (x, y) => x + y,
+    "-": (x, y) => x - y,
+    "/": (x, y) => x / y,
+    "*": (x, y) => x * y
   }
 
   handleClick(event) {
@@ -38,10 +48,45 @@ class App extends Component {
     })
   }
 
+  handleBackspace() {
+    this.setState(prevState => {
+      const str = prevState.display;
+      const result = str.substring(0, str.length - 1);
+      return {
+        display: result,
+      }
+    })
+  }
+
+  handleOperation(event) {
+    let { name } = event.target;
+    this.setState(prevState => {
+      return {
+        memory: prevState.display,
+        display: "",
+        operation: name
+      }
+    })
+  }
+
+  handleEquals() {
+    this.setState(prevState => {
+      let x = parseFloat(prevState.memory);
+      let y = parseFloat(prevState.display);
+      let result = this.operations[prevState.operation](x, y);
+      return {
+        memory: "",
+        display: result.toString(),
+        operation: "",
+      }
+    })
+  }
+
   render() {
     let nums = this.state.numbers
     return (
       <div className="calculator">
+        <Memory data={this.state.memory} />
         <Display data={this.state.display} />
         <div className="buttons-container">
           <div className="column">
@@ -72,39 +117,50 @@ class App extends Component {
                     {num.toString()}
                   </button>)
               }
+                <button
+                  name="equals"
+                  onClick={this.handleEquals}
+                >
+                  =
+                </button>
             </div>
           </div>
           <div className="column">
+          {/* Operations here*/}
               <div className="operations-container">
                 <button
                   name="backspace"
                   onClick={this.handleBackspace}
                 >
-                {"<--"}
+                  {"<--"}
                 </button>
+
                 <button
-                  name="plus"
-                  onClick={this.handlePlus}
+                  name="+"
+                  onClick={this.handleOperation}
                 >
-                +
+                  +
                 </button>
+
                 <button
-                  name="minus"
-                  onClick={this.handleMinus}
+                  name="-"
+                  onClick={this.handleOperation}
                 >
-                -
+                  -
                 </button>
+
                 <button
-                  name="divide"
-                  onClick={this.handleDivide}
+                  name="/"
+                  onClick={this.handleOperation}
                 >
-                /
+                  /
                 </button>
+
                 <button
-                  name="multiply"
-                  onClick={this.handleMultiply}
+                  name="*"
+                  onClick={this.handleOperation}
                 >
-                *
+                  *
                 </button>
               </div>
           </div>

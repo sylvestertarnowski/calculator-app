@@ -3,3 +3,18 @@
   margin: 0;
   padding: 0;
 }
+
+html {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: rgb(221, 220, 220);
+}
+
+/* #id {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */

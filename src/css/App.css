@@ -1,9 +1,9 @@
 .calculator {
-    height: 700px;
     width: 400px;
     border: 1px dashed green;
     text-align: right;
-    background: #6d6d6d
+    background: #6d6d6d;
+    padding: 2px;
 }
 
 .clear-container {
@@ -19,6 +19,9 @@ button {
     border: none;
     box-shadow: none;
     margin: 2px;
+    min-height: 60px;
+    max-height: 80px;
+    font-size: 1em;
 }
 
 .numpad-container {

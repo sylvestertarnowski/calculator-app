@@ -67,16 +67,16 @@ class App extends Component {
 
   checkIfArrayEndsOnOperator(arr) {
     const lastChar = arr[arr.length - 1];
-    if(
-        lastChar === "+" ||
-        lastChar === "-" ||
-        lastChar === "/" ||
-        lastChar === "*"
-      ) {
-        return true;
-      } else {
-        return false;
-      }
+    if (
+      lastChar === "+" ||
+      lastChar === "-" ||
+      lastChar === "/" ||
+      lastChar === "*"
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   handleEquals() {
@@ -102,6 +102,7 @@ class App extends Component {
   render() {
     let nums = this.state.numbers
     return (
+
       <div className="calculator">
         <Memory data={this.state.memory} />
         <Display data={this.state.display} />
@@ -134,53 +135,53 @@ class App extends Component {
                     {num.toString()}
                   </button>)
               }
-                <button
-                  id="equals"
-                  name="equals"
-                  onClick={this.handleEquals}
-                >
-                  =
+              <button
+                id="equals"
+                name="equals"
+                onClick={this.handleEquals}
+              >
+                =
                 </button>
             </div>
           </div>
           <div className="column">
-          {/* Operations here*/}
-              <div className="operations-container">
-                <button
-                  name="backspace"
-                  onClick={this.handleBackspace}
-                >
-                  {"<--"}
+            {/* Operations here*/}
+            <div className="operations-container">
+              <button
+                name="backspace"
+                onClick={this.handleBackspace}
+              >
+                {"<--"}
+              </button>
+
+              <button
+                name="+"
+                onClick={this.handleOperation}
+              >
+                +
                 </button>
 
-                <button
-                  name="+"
-                  onClick={this.handleOperation}
-                >
-                  +
+              <button
+                name="-"
+                onClick={this.handleOperation}
+              >
+                -
                 </button>
 
-                <button
-                  name="-"
-                  onClick={this.handleOperation}
-                >
-                  -
+              <button
+                name="/"
+                onClick={this.handleOperation}
+              >
+                /
                 </button>
 
-                <button
-                  name="/"
-                  onClick={this.handleOperation}
-                >
-                  /
+              <button
+                name="*"
+                onClick={this.handleOperation}
+              >
+                *
                 </button>
-
-                <button
-                  name="*"
-                  onClick={this.handleOperation}
-                >
-                  *
-                </button>
-              </div>
+            </div>
           </div>
         </div>
       </div>

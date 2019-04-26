@@ -1,5 +1,6 @@
 .display {
-    font-size: 28px;
-    height: 32px;
+    padding: 10px;
+    font-size: 38px;
+    min-height: 50px;
     color: #fff;
 }

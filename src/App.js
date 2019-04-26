@@ -71,15 +71,31 @@ class App extends Component {
   }
 
   checkIfArrayEndsOnOperator(arr) {
-
+    const lastChar = arr[arr.length - 1];
+    if(
+        lastChar === "+" ||
+        lastChar === "-" ||
+        lastChar === "/" ||
+        lastChar === "*"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
   }
 
   handleEquals() {
     this.setState(prevState => {
-      let finalArray = prevState.memory;
-      finalArray.push(prevState.display);
-      // if(finalArray[finalArray.length - 1] )
+      const { memory, display } = prevState;
+      let finalArray = memory;
+      if (display.length > 0) {
+        finalArray.push(display);
+      }
+      if (this.checkIfArrayEndsOnOperator(finalArray)) {
+        finalArray.pop();
+      }
       let finalEquasion = finalArray.join(" ");
+      // eslint-disable-next-line
       let result = eval(finalEquasion);
       return {
         memory: [],

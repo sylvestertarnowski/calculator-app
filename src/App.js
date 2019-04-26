@@ -20,13 +20,6 @@ class App extends Component {
     this.handleEquals = this.handleEquals.bind(this);
   }
 
-  operations = {
-    "+": (x, y) => x + y,
-    "-": (x, y) => x - y,
-    "/": (x, y) => x / y,
-    "*": (x, y) => x * y
-  }
-
   handleClick(event) {
     const { name } = event.target;
     this.setState(prevState => {

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import "./css/App.css";
+import "./css/Operations.css";
+import "./css/Numbers.css";
 import Display from "./Display";
 import Memory from "./Memory";
 
@@ -9,7 +11,7 @@ class App extends Component {
     this.state = {
       memory: [],
       display: "",
-      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "."]
+      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, ".", 0]
     }
 
     this.handleClick = this.handleClick.bind(this); //clicking on any number or dot
@@ -110,13 +112,13 @@ class App extends Component {
                 className="clear"
                 onClick={this.handleClear}
               >
-                Clear
+                C
               </button>
               <button
                 className="clear"
                 onClick={this.handleClearAll}
               >
-                Clear All
+                CA
               </button>
             </div>
             <div className="numpad-container">
@@ -133,6 +135,7 @@ class App extends Component {
                   </button>)
               }
                 <button
+                  id="equals"
                   name="equals"
                   onClick={this.handleEquals}
                 >

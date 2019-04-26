@@ -1,8 +1,9 @@
 .calculator {
-    /* height: 500px;
-    width: 400px; */
+    height: 700px;
+    width: 400px;
     border: 1px dashed green;
-    font-size: 28px;
+    text-align: right;
+    background: #6d6d6d
 }
 
 .clear-container {
@@ -14,6 +15,12 @@
     width: 100%;
 }
 
+button {
+    border: none;
+    box-shadow: none;
+    margin: 2px;
+}
+
 .numpad-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -22,9 +29,4 @@
 .buttons-container {
     display: grid;
     grid-template-columns: 4fr 1fr;
-}
-
-.operations-container {
-    display: flex;
-    flex-direction: column;
 }

@@ -1,0 +1,9 @@
+.operations-container {
+    display: flex;
+    flex-direction: column;
+}
+.operations-container button, .clear, #\., #equals {
+    font-family: inherit;
+    background: #424242;
+    color: white;
+}

@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       memory: [],
       display: "",
-      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, ".", 0]
+      numbers: ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"],
+      operations: ["*", "-", "+", "/"]
     }
 
     this.handleClick = this.handleClick.bind(this); //clicking on any number or dot
@@ -20,6 +21,7 @@ class App extends Component {
     this.handleBackspace = this.handleBackspace.bind(this);
     this.handleOperation = this.handleOperation.bind(this);
     this.handleEquals = this.handleEquals.bind(this);
+    this.handleKey = this.handleKey.bind(this);
   }
 
   handleClick(event) {
@@ -68,7 +70,6 @@ class App extends Component {
     this.setState(prevState => {
       let updatedMemory = prevState.memory;
       updatedMemory.push(prevState.display, name);
-      console.log(updatedMemory);
       return {
         memory: updatedMemory,
         display: "",
@@ -110,11 +111,41 @@ class App extends Component {
     })
   }
 
+  componentDidMount() {
+    document.addEventListener('keyup', this.handleKey);
+  }
+
+  handleKey(event) {
+    event.preventDefault();
+    const { numbers, operations } = this.state;
+    console.log(event.key);
+    let key = {
+      target: {
+        name: event.key,
+      }
+    };
+    if ( numbers.includes(event.key) ) {
+      this.handleClick(key);
+    }
+    if ( operations.includes(event.key) ) {
+      this.handleOperation(key);
+    }
+    if ( event.key === "Backspace" ) {
+      this.handleBackspace();
+    }
+    if ( event.key === "=" || event.key === "Enter" ) {
+      this.handleEquals();
+    }
+    if ( event.key === "Delete" ) {
+      this.handleClear();
+    }
+  }
+
   render() {
     let nums = this.state.numbers
     return (
 
-      <div className="calculator">
+      <div className="calculator" tabIndex="-1">
         <Memory data={this.state.memory} />
         <Display data={this.state.display} />
         <div className="buttons-container">
@@ -142,6 +173,7 @@ class App extends Component {
                     className="number"
                     id={num.toString()}
                     onClick={this.handleClick}
+                    tabIndex="0"
                   >
                     {num.toString()}
                   </button>)

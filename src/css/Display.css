@@ -3,4 +3,5 @@
     font-size: 38px;
     min-height: 50px;
     color: #fff;
+    word-break: break-all;
 }

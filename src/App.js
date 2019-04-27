@@ -54,6 +54,17 @@ class App extends Component {
 
   handleOperation(event) {
     let { name } = event.target;
+    let { memory, display } = this.state;
+    if (display === "" && this.checkIfArrayEndsOnOperator(memory)) {
+      this.setState(prevState => {
+        let arr = prevState.memory;
+        arr[arr.length - 1] = name;
+        return {
+          memory: arr,
+        }
+      })
+      return;
+    }
     this.setState(prevState => {
       let updatedMemory = prevState.memory;
       updatedMemory.push(prevState.display, name);

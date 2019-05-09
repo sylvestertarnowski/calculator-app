@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import "./css/App.css";
 import "./css/Operations.css";
 import "./css/Numbers.css";
-import Display from "./Display";
-import Memory from "./Memory";
+import Display from "./components/Display";
+import Memory from "./components/Memory";
+import Calculator from './components/layout/Calculator';
 
 type State = {
   memory: any[];
@@ -25,7 +26,7 @@ class App extends Component<P, State> {
       operations: ["*", "-", "+", "/"]
     }
 
-  handleClick = (event) => {
+  handleClick = (event: any) => {
     const { name } = event.target;
     this.setState(prevState => {
       return { display: prevState.display + name, }
@@ -55,7 +56,7 @@ class App extends Component<P, State> {
     })
   }
 
-  handleOperation = (event) => {
+  handleOperation = (event: any) => {
     let { name } = event.target;
     let { memory, display } = this.state;
     if (display === "" && this.checkIfArrayEndsOnOperator(memory)) {
@@ -78,7 +79,7 @@ class App extends Component<P, State> {
     })
   }
 
-  checkIfArrayEndsOnOperator = (arr) => {
+  checkIfArrayEndsOnOperator = (arr: string[]) => {
     const lastChar = arr[arr.length - 1];
     if (
       lastChar === "+" ||
@@ -116,7 +117,7 @@ class App extends Component<P, State> {
     document.addEventListener('keyup', this.handleKey);
   }
 
-  handleKey = (event) => {
+  handleKey = (event: any) => {
     event.preventDefault();
     const { numbers, operations } = this.state;
     console.log(event.key);
@@ -146,7 +147,7 @@ class App extends Component<P, State> {
     let nums = this.state.numbers
     return (
 
-      <div className="calculator" tabIndex={-1}>
+      <Calculator>
         <Memory data={this.state.memory} />
         <Display data={this.state.display} />
         <div className="buttons-container">
@@ -228,7 +229,7 @@ class App extends Component<P, State> {
             </div>
           </div>
         </div>
-      </div>
+      </Calculator>
     )
   }
 }

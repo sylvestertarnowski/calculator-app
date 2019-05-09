@@ -1,7 +1,11 @@
 import React from "react";
-import "./css/Display.css";
+import "../css/Display.css";
 
-function Display(props) {
+type P = {
+    data: string;
+}
+
+const Display: React.FC<P> = (props) => {
     return (
         <div className="display">{props.data}</div>
     )

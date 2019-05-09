@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/Memory.css";
+import "../css/Memory.css";
 
 type P = {
     data: any[];

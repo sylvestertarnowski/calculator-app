@@ -1,7 +1,11 @@
 import React from "react";
 import "./css/Memory.css";
 
-function Memory(props) {
+type P = {
+    data: any[];
+}
+
+const Memory: React.FC<P> = (props) => {
     return (
         <div className="memory">
             {props.data.join(" ")}

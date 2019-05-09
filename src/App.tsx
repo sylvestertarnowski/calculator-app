@@ -5,46 +5,47 @@ import "./css/Numbers.css";
 import Display from "./Display";
 import Memory from "./Memory";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
+type State = {
+  memory: any[];
+  display: string;
+  numbers: string[];
+  operations: string[];
+}
+
+type P = {
+  [key: string]: any;
+}
+
+class App extends Component<P, State> {
+
+    readonly state = {
       memory: [],
       display: "",
       numbers: ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"],
       operations: ["*", "-", "+", "/"]
     }
 
-    this.handleClick = this.handleClick.bind(this); //clicking on any number or dot
-    this.handleClear = this.handleClear.bind(this);
-    this.handleClearAll = this.handleClearAll.bind(this);
-    this.handleBackspace = this.handleBackspace.bind(this);
-    this.handleOperation = this.handleOperation.bind(this);
-    this.handleEquals = this.handleEquals.bind(this);
-    this.handleKey = this.handleKey.bind(this);
-  }
-
-  handleClick(event) {
+  handleClick = (event) => {
     const { name } = event.target;
     this.setState(prevState => {
       return { display: prevState.display + name, }
     })
   }
 
-  handleClear() {
+  handleClear = () => {
     this.setState({
       display: "",
     })
   }
 
-  handleClearAll() {
+  handleClearAll = () => {
     this.setState({
       memory: [],
       display: "",
     })
   }
 
-  handleBackspace() {
+  handleBackspace = () => {
     this.setState(prevState => {
       const str = prevState.display;
       const result = str.substring(0, str.length - 1);
@@ -54,7 +55,7 @@ class App extends Component {
     })
   }
 
-  handleOperation(event) {
+  handleOperation = (event) => {
     let { name } = event.target;
     let { memory, display } = this.state;
     if (display === "" && this.checkIfArrayEndsOnOperator(memory)) {
@@ -77,7 +78,7 @@ class App extends Component {
     })
   }
 
-  checkIfArrayEndsOnOperator(arr) {
+  checkIfArrayEndsOnOperator = (arr) => {
     const lastChar = arr[arr.length - 1];
     if (
       lastChar === "+" ||
@@ -91,7 +92,7 @@ class App extends Component {
     }
   }
 
-  handleEquals() {
+  handleEquals = () => {
     this.setState(prevState => {
       const { memory, display } = prevState;
       let finalArray = memory;
@@ -115,7 +116,7 @@ class App extends Component {
     document.addEventListener('keyup', this.handleKey);
   }
 
-  handleKey(event) {
+  handleKey = (event) => {
     event.preventDefault();
     const { numbers, operations } = this.state;
     console.log(event.key);
@@ -145,7 +146,7 @@ class App extends Component {
     let nums = this.state.numbers
     return (
 
-      <div className="calculator" tabIndex="-1">
+      <div className="calculator" tabIndex={-1}>
         <Memory data={this.state.memory} />
         <Display data={this.state.display} />
         <div className="buttons-container">
@@ -173,7 +174,7 @@ class App extends Component {
                     className="number"
                     id={num.toString()}
                     onClick={this.handleClick}
-                    tabIndex="0"
+                    tabIndex={0}
                   >
                     {num.toString()}
                   </button>)

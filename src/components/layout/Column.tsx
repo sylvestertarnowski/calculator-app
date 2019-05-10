@@ -1,8 +1,6 @@
 import React from 'react';
 
-type P = React.ReactNode;
-
-const Column: React.FC<P> = ({ children }) => {
+const Column: React.FC = ({ children }) => {
     return (
         <div className="column">
             {children}

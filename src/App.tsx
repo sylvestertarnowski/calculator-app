@@ -182,13 +182,12 @@ class App extends Component<P, State> {
                     {num.toString()}
                   </button>)
               }
-              <button
+              <Operation
                 id="equals"
                 name="equals"
-                onClick={this.handleEquals}
-              >
-                =
-              </button>
+                handleClick={this.handleEquals}
+                text="="
+              />
             </div>
           </Column>
           <Column>
@@ -206,33 +205,6 @@ class App extends Component<P, State> {
                       text={operation}
                     />)
               }
-              {/* <button
-                name="+"
-                onClick={this.handleOperation}
-              >
-                +
-                </button>
-
-              <button
-                name="-"
-                onClick={this.handleOperation}
-              >
-                -
-                </button>
-
-              <button
-                name="/"
-                onClick={this.handleOperation}
-              >
-                /
-                </button>
-
-              <button
-                name="*"
-                onClick={this.handleOperation}
-              >
-                *
-                </button> */}
             </div>
           </Column>
         </div>

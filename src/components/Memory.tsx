@@ -2,7 +2,7 @@ import React from "react";
 import "../css/Memory.css";
 
 type P = {
-    data: any[];
+    data: string[];
 }
 
 const Memory: React.FC<P> = (props) => {

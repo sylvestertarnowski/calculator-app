@@ -5,6 +5,9 @@ import "./css/Numbers.css";
 import Display from "./components/Display";
 import Memory from "./components/Memory";
 import Calculator from './components/layout/Calculator';
+import Column from './components/layout/Column';
+import Clear from './components/buttons/Clear';
+import Operation from './components/buttons/Operation';
 
 type State = {
   memory: any[];
@@ -23,7 +26,7 @@ class App extends Component<P, State> {
       memory: [],
       display: "",
       numbers: ["1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0"],
-      operations: ["*", "-", "+", "/"]
+      operations: ["+", "-", "*" , "/"]
     }
 
   handleClick = (event: any) => {
@@ -79,7 +82,7 @@ class App extends Component<P, State> {
     })
   }
 
-  checkIfArrayEndsOnOperator = (arr: string[]) => {
+  checkIfArrayEndsOnOperator = (arr: string[]): boolean => {
     const lastChar = arr[arr.length - 1];
     if (
       lastChar === "+" ||
@@ -96,7 +99,7 @@ class App extends Component<P, State> {
   handleEquals = () => {
     this.setState(prevState => {
       const { memory, display } = prevState;
-      let finalArray = memory;
+      let finalArray: string[] = memory;
       if (display.length > 0) {
         finalArray.push(display);
       }
@@ -145,26 +148,25 @@ class App extends Component<P, State> {
 
   render() {
     let nums = this.state.numbers
+    let operations = this.state.operations;
     return (
 
       <Calculator>
         <Memory data={this.state.memory} />
         <Display data={this.state.display} />
         <div className="buttons-container">
-          <div className="column">
+          <Column>
             <div className="clear-container">
-              <button
+              <Clear
                 className="clear"
-                onClick={this.handleClear}
-              >
-                C
-              </button>
-              <button
+                handleClick={this.handleClear}
+                text="C"
+              />
+              <Clear
                 className="clear"
-                onClick={this.handleClearAll}
-              >
-                CA
-              </button>
+                handleClick={this.handleClearAll}
+                text="CA"
+              />
             </div>
             <div className="numpad-container">
               {
@@ -186,20 +188,25 @@ class App extends Component<P, State> {
                 onClick={this.handleEquals}
               >
                 =
-                </button>
-            </div>
-          </div>
-          <div className="column">
-            {/* Operations here*/}
-            <div className="operations-container">
-              <button
-                name="backspace"
-                onClick={this.handleBackspace}
-              >
-                {"<--"}
               </button>
-
-              <button
+            </div>
+          </Column>
+          <Column>
+            <div className="operations-container">
+              <Operation
+                name="backspace"
+                handleClick={this.handleBackspace}
+                text="<--"
+              />
+              {
+                operations.map(operation =>
+                    <Operation
+                      name={operation}
+                      handleClick={this.handleOperation}
+                      text={operation}
+                    />)
+              }
+              {/* <button
                 name="+"
                 onClick={this.handleOperation}
               >
@@ -225,9 +232,9 @@ class App extends Component<P, State> {
                 onClick={this.handleOperation}
               >
                 *
-                </button>
+                </button> */}
             </div>
-          </div>
+          </Column>
         </div>
       </Calculator>
     )

@@ -101,9 +101,10 @@ class App extends Component<P, State> {
   }
 
   checkEdgeCases = ():boolean => {
-    if (this.state.display.length === 0 && this.state.memory.length === 0) {
+    const { display, memory } = this.state;
+    if (display.length === 0 && memory.length === 0) {
       return true;
-    } else if (this.state.memory[1] === "-") {
+    } else if (memory[1] === "-" && memory.length === 2) {
       return true;
     } else {
       return false;

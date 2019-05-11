@@ -21,6 +21,8 @@ describe('Operators behaviour', () => {
         cy.contains('1').click();
         cy.contains('/').click();
         cy.contains('+').click();
-
+        cy.contains('=').click();
+        cy.contains('=').click();
+        cy.contains('=').click();
     })
 })

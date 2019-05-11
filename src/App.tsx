@@ -97,23 +97,28 @@ class App extends Component<P, State> {
   }
 
   handleEquals = () => {
+    if (this.state.display.length === 0 && this.state.memory.length === 0) {
+      console.log('prevented crash!');
+      return;
+    }
     this.setState(prevState => {
       const { memory, display } = prevState;
       let finalArray: string[] = memory;
       if (display.length > 0) {
         finalArray.push(display);
-      }
+      };
       if (this.checkIfArrayEndsOnOperator(finalArray)) {
         finalArray.pop();
-      }
+      };
       let finalEquasion = finalArray.join(" ");
       // eslint-disable-next-line
       let result = eval(finalEquasion);
+      let resultStr = result.toString();
       return {
         memory: [],
-        display: result,
-      }
-    })
+        display: resultStr,
+      };
+    });
   }
 
   componentDidMount() {
@@ -200,6 +205,7 @@ class App extends Component<P, State> {
               {
                 operations.map(operation =>
                     <Operation
+                      key={operation}
                       name={operation}
                       handleClick={this.handleOperation}
                       text={operation}

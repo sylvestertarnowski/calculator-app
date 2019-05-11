@@ -62,6 +62,10 @@ class App extends Component<P, State> {
   handleOperation = (event: any) => {
     let { name } = event.target;
     let { memory, display } = this.state;
+    if (name !== "-" && memory.length === 0 && display.length === 0) {
+      console.log('prevented crash in the future');
+      return;
+    }
     if (display === "" && this.checkIfArrayEndsOnOperator(memory)) {
       this.setState(prevState => {
         let arr = prevState.memory;
@@ -96,8 +100,18 @@ class App extends Component<P, State> {
     }
   }
 
-  handleEquals = () => {
+  checkEdgeCases = ():boolean => {
     if (this.state.display.length === 0 && this.state.memory.length === 0) {
+      return true;
+    } else if (this.state.memory[1] === "-") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  handleEquals = () => {
+    if (this.checkEdgeCases()) {
       console.log('prevented crash!');
       return;
     }

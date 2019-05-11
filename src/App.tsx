@@ -31,6 +31,9 @@ class App extends Component<P, State> {
 
   handleClick = (event: any) => {
     const { name } = event.target;
+    if(this.checkEdgeCasesForDot(name)) {
+      return;
+    }
     this.setState(prevState => {
       return { display: prevState.display + name, }
     })
@@ -94,6 +97,18 @@ class App extends Component<P, State> {
       lastChar === "/" ||
       lastChar === "*"
     ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkEdgeCasesForDot = (key: string):boolean => {
+    const { display } = this.state;
+
+    if(display === "" && key === ".") {
+      return true;
+    } else if (display.includes('.')){
       return true;
     } else {
       return false;

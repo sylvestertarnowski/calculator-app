@@ -4,15 +4,9 @@ describe('Second test', () => {
 
         cy.contains('CA').click();
         cy.contains('1').click();
-        cy.contains('2')
+        cy.contains('2').click();
     });
 });
-
-describe('My First Test', function() {
-    it('Does not do much!', function() {
-        expect(true).to.equal(true);
-    })
-})
 
 describe('Operators behaviour', () => {
     it('Click multiple operators in a row', () => {
@@ -24,5 +18,25 @@ describe('Operators behaviour', () => {
         cy.contains('=').click();
         cy.contains('=').click();
         cy.contains('=').click();
+    })
+})
+
+describe('Minus behaviour', () => {
+    it('Checks if minus behaves properly', () => {
+        cy.contains('-').click();
+        cy.contains('-').click();
+        cy.contains('=').click();
+        cy.contains('6').click();
+        cy.contains('6').click();
+        cy.contains('-').click();
+        cy.contains('=').click();
+    })
+})
+
+describe('Dot in front', () => {
+    it('Check if dot can appear in front without a number first', () => {
+        cy.contains('CA').click();
+        cy.get('#\\.').click();
+        cy.get('.display').should('not.contain', '.');
     })
 })

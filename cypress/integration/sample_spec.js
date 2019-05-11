@@ -40,3 +40,14 @@ describe('Dot in front', () => {
         cy.get('.display').should('not.contain', '.');
     })
 })
+
+describe('Dot in the middle', () => {
+    it('Check if dot can be in the number multiple times', () => {
+        cy.contains('CA').click();
+        cy.get('#6').click();
+        cy.get('#\\.').click();
+        cy.get('#6').click();
+        cy.get('#\\.').click();
+        cy.get('.display').should('contain', '6.6');
+    })
+})

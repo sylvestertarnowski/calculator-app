@@ -31,7 +31,7 @@ class App extends Component<P, State> {
 
   handleClick = (event: any) => {
     const { name } = event.target;
-    if(this.checkEdgeCasesForDot(name)) {
+    if(name === "." && this.checkEdgeCasesForDot(name)) {
       return;
     }
     this.setState(prevState => {

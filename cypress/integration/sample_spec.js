@@ -18,8 +18,8 @@ describe('Operators behaviour', () => {
         cy.contains('=').click();
         cy.contains('=').click();
         cy.contains('=').click();
-    })
-})
+    });
+});
 
 describe('Minus behaviour', () => {
     it('Checks if minus behaves properly', () => {
@@ -30,16 +30,16 @@ describe('Minus behaviour', () => {
         cy.contains('6').click();
         cy.contains('-').click();
         cy.contains('=').click();
-    })
-})
+    });
+});
 
 describe('Dot in front', () => {
     it('Check if dot can appear in front without a number first', () => {
         cy.contains('CA').click();
         cy.get('#\\.').click();
         cy.get('.display').should('not.contain', '.');
-    })
-})
+    });
+});
 
 describe('Dot in the middle', () => {
     it('Check if dot can be in the number multiple times', () => {
@@ -49,5 +49,14 @@ describe('Dot in the middle', () => {
         cy.get('#6').click();
         cy.get('#\\.').click();
         cy.get('.display').should('contain', '6.6');
-    })
-})
+    });
+});
+
+describe('Zero Edge Cases', () => {
+    it("Zero shouldn't be duplicated in front", () => {
+        cy.contains('CA').click();
+        cy.get('#0').click();
+        cy.get('#1').click();
+        cy.get('.display').should('not.contain', "0");
+    });
+});
